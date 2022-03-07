@@ -1,0 +1,33 @@
+def leap(y):
+    if (y%400 == 0):
+        return 1
+    elif (y%4 == 0) and (y%100 != 0):
+        return 1
+    else:
+        return 0
+
+def month(y, m, d):
+    day31 = [1, 3, 5, 7, 8, 10, 12]
+    day30 = [4, 6, 9, 11]
+    if m in day31:
+        left = 31-d
+    if m in day30:
+        left = 30-d
+    if ((m == 2) and leap(y) == 1):
+        left = 29-d
+    if ((m == 2) and leap(y) == 0):
+        left = 28-d
+    return left
+
+def year(y, m, d):
+    leftyear = 0
+    for m in range(m+1, 13, 1):
+        leftyear = leftyear + month(y, m, 0)
+    return leftyear
+
+y = int(input("What is the year? "))
+m = int(input("What is the month? "))
+d = int(input("What is the day? "))
+
+print(month(y, m, d) + year(y, m, d))
+
